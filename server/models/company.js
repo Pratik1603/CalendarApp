@@ -21,18 +21,16 @@ const companySchema = new mongoose.Schema({
   ],
 });
 
-// Get the last five communications sorted by date
 companySchema.methods.getLastFiveCommunications = function () {
   return this.communications
-    .sort((a, b) => new Date(b.date) - new Date(a.date)) // Sort by most recent first
-    .slice(0, 5) // Take the last 5 communications
+    .sort((a, b) => new Date(b.date) - new Date(a.date)) 
+    .slice(0, 5) 
     .map((communication) => ({
       type: communication.type,
-      date: communication.date.toLocaleDateString(), // Format date
+      date: communication.date.toLocaleDateString(), 
     }));
 };
 
-// Check if the communication is overdue
 companySchema.methods.isOverdue = function () {
   const lastCommunication = this.communications.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
   const periodicityDays = parseInt(this.communicationPeriodicity.split(" ")[0]) || 14;
@@ -42,7 +40,6 @@ companySchema.methods.isOverdue = function () {
   );
 };
 
-// Check if the communication is due today
 companySchema.methods.isDueToday = function () {
   const lastCommunication = this.communications.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
   const periodicityDays = parseInt(this.communicationPeriodicity.split(" ")[0]) || 14;
@@ -54,21 +51,20 @@ companySchema.methods.isDueToday = function () {
   );
 };
 
-// Get the next scheduled communication based on the periodicity
 companySchema.methods.getNextScheduledCommunication = function () {
   const lastCommunication = this.communications.sort((a, b) => new Date(b.date) - new Date(a.date))[0];
   const periodicityDays = parseInt(this.communicationPeriodicity.split(" ")[0]) || 14;
 
   if (!lastCommunication) {
-    return null; // No communications yet, no next scheduled communication
+    return null; 
   }
 
   const nextScheduledDate = new Date(lastCommunication.date);
-  nextScheduledDate.setDate(nextScheduledDate.getDate() + periodicityDays); // Add periodicity to the last communication date
+  nextScheduledDate.setDate(nextScheduledDate.getDate() + periodicityDays); 
 
   return {
-    type: lastCommunication.type, // Type of the next communication (same as last one)
-    date: nextScheduledDate.toLocaleDateString(), // Format next communication date
+    type: lastCommunication.type,
+    date: nextScheduledDate.toLocaleDateString(), 
   };
 };
 

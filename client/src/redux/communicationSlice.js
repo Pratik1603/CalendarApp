@@ -16,7 +16,7 @@ export const logCommunication = createAsyncThunk(
             return response.data;
           })
         );
-        return responses; // Contains all the updated company details
+        return responses; 
       } catch (error) {
         return thunkAPI.rejectWithValue(error.response.data);
       }

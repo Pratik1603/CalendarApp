@@ -10,12 +10,10 @@ const __dirname=path.resolve();
 
 const corsOptions = {
     origin: function (origin, callback) {
-        callback(null, true); // Allow all origins
+        callback(null, true); 
     },
-    credentials: true // Allows credentials to be sent
+    credentials: true 
 }
-
-// Enable CORS for all requests or specify your frontend URL
 app.use(cors(corsOptions));
 
 app.use(bodyParser.json());
@@ -28,7 +26,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/notifications", notRoutes);
 
-// MongoDB Connection
+
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => console.log("MongoDB Connected"))

@@ -31,13 +31,12 @@ export const fetchCompanies = createAsyncThunk("companies/fetch", async () => {
 // Async thunk to delete a company
 export const deleteCompany = createAsyncThunk("companies/delete", async (companyId) => {
   await axios.delete(`http://localhost:8800/api/admin/${companyId}`);
-  return companyId; // Return the deleted company's ID to update the state
+  return companyId; 
 });
 
-// Async thunk to update a company
 export const updateCompany = createAsyncThunk("companies/update", async ({ id, updatedData }) => {
   const response = await axios.put(`http://localhost:8800/api/admin/${id}`, updatedData);
-  return response.data; // Return the updated company data
+  return response.data; 
 });
 
 const companySlice = createSlice({
@@ -46,19 +45,18 @@ const companySlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Handle fetch companies
+      
       .addCase(fetchCompanies.fulfilled, (state, action) => action.payload)
 
-      // Handle delete company
       .addCase(deleteCompany.fulfilled, (state, action) => {
         return state.filter((company) => company._id !== action.payload); // Remove the deleted company
       })
 
-      // Handle update company
+      
       .addCase(updateCompany.fulfilled, (state, action) => {
         const index = state.findIndex((company) => company._id === action.payload._id);
         if (index !== -1) {
-          state[index] = action.payload; // Replace the updated company
+          state[index] = action.payload; 
         }
       });
   },

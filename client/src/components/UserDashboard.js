@@ -106,7 +106,6 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Calendar Button (Floating) */}
       <div className="fixed bottom-10 right-10">
         <button
           className="bg-blue-500 text-white p-3 rounded-full shadow-lg hover:bg-blue-600 transition-all"
@@ -126,7 +125,7 @@ const Dashboard = () => {
       <br>
       </br>
       <br></br>
-      {/* Company Grid */}
+     
       <div className="overflow-x-auto">
         <table className="table-auto w-full text-left">
           <thead>
@@ -161,7 +160,7 @@ const Dashboard = () => {
                   </td>
                   <td className="px-4 py-2">{company.name}</td>
                   <td className="px-4 py-2">
-                    {/* Displaying last five communications */}
+                  
                     {company.lastFiveCommunications?.map((comm, index) => (
                       <div key={index}>
                         <span
@@ -176,7 +175,7 @@ const Dashboard = () => {
                   </td>
 
                   <td className="px-4 py-2">
-                    {/* Displaying next scheduled communication */}
+                  
                     {company.nextScheduledCommunication ? (
                       <>
                         Next Communication - {company.nextScheduledCommunication}
@@ -192,10 +191,6 @@ const Dashboard = () => {
         </table>
       </div>
 
-      {/* Log Communication Button */}
-      
-
-      {/* Modal */}
 
       {showModal && (
         <Modal
@@ -204,7 +199,6 @@ const Dashboard = () => {
         />
       )}
 
-      {/* Calendar Modal */}
       {showCalendarModal && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
           <div className="relative bg-white p-6 rounded-lg shadow-lg w-96">
